@@ -23,12 +23,20 @@ def chat():
 def get_Chat_response(text):
     chat_completion = client.chat.completions.create(
     messages=[
+        # Set an optional system message. This sets the behavior of the
+        # assistant and can be used to provide specific instructions for
+        # how it should behave throughout the conversation.
+        {
+            "role": "system",
+            "content": "You are designed to provide simple and concise answers. Your responses should be clear and to the point."
+        },
+        # Set a user message for the assistant to respond to.
         {
             "role": "user",
             "content": text,
         }
     ],
-    model="mixtral-8x7b-32768",
+    model="llama3-8b-8192",
     )
     return chat_completion.choices[0].message.content
 
